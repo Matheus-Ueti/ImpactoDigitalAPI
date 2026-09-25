@@ -72,7 +72,7 @@ const PACKAGES = {
 
 function validateOrderBody(body) {
   const { platform, category, package_id, target, payment_method, customer } = body;
-  if (!platform || !['instagram', 'tiktok', 'kwai'].includes(platform)) return 'Plataforma inválida.';
+  if (!platform || !['instagram', 'kwai'].includes(platform)) return 'Plataforma inválida.';
   if (!category || !['followers_mundial', 'followers_br', 'likes_mundial', 'views_reels'].includes(category)) return 'Categoria inválida.';
   if (!PACKAGES[category].find((p) => p.id === Number(package_id))) return 'Pacote não encontrado.';
   if (!target || target.trim().length < 2) return 'Usuário/link obrigatório.';

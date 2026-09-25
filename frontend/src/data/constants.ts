@@ -1,5 +1,5 @@
 import type { ComponentType } from 'react';
-import { Camera, Video } from 'lucide-react';
+import { Camera } from 'lucide-react';
 import KwaiIcon from '@/components/ui/KwaiIcon';
 
 export interface Platform {
@@ -11,7 +11,6 @@ export interface Platform {
 
 export const PLATFORMS: Platform[] = [
   { id: 'instagram', name: 'Instagram', icon: Camera, color: 'hover:text-pink-500 hover:border-pink-500 hover:bg-pink-500/10' },
-  { id: 'tiktok', name: 'TikTok', icon: Video, color: 'hover:text-cyan-400 hover:border-cyan-400 hover:bg-cyan-400/10' },
   { id: 'kwai', name: 'Kwai', icon: KwaiIcon, color: 'hover:text-orange-400 hover:border-orange-400 hover:bg-orange-400/10' },
 ];
 
