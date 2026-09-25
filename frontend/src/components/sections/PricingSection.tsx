@@ -23,11 +23,11 @@ const CATEGORY_PLACEHOLDER: Record<Category, string> = {
   views_reels: 'Link do Reel',
 };
 
-const TABS: { key: Category; label: string }[] = [
-  { key: 'followers_mundial', label: 'Seg. Mundial' },
-  { key: 'followers_br', label: 'Seg. Brasileiro' },
-  { key: 'likes_mundial', label: 'Curtidas' },
-  { key: 'views_reels', label: 'Views Reels' },
+const ALL_TABS: { key: Category; label: string; platforms: string[] }[] = [
+  { key: 'followers_mundial', label: 'Seg. Mundial',    platforms: ['instagram', 'kwai'] },
+  { key: 'followers_br',      label: 'Seg. Brasileiro', platforms: ['instagram'] },
+  { key: 'likes_mundial',     label: 'Curtidas',        platforms: ['instagram', 'kwai'] },
+  { key: 'views_reels',       label: 'Views Reels',     platforms: ['instagram'] },
 ];
 
 const SHARED_FEATURES = [
@@ -45,13 +45,16 @@ interface SelectedPkg {
 }
 
 export default function PricingSection({ activePlatform, activeCategory, onCategoryChange }: PricingSectionProps) {
-  const packages = PACKAGES[activeCategory];
-  const categoryLabel = CATEGORY_LABELS[activeCategory];
-  const placeholder = CATEGORY_PLACEHOLDER[activeCategory];
+  const tabs = ALL_TABS.filter((t) => t.platforms.includes(activePlatform));
+  const validCategory = tabs.some((t) => t.key === activeCategory) ? activeCategory : tabs[0]!.key;
+
+  const packages = PACKAGES[validCategory];
+  const categoryLabel = CATEGORY_LABELS[validCategory];
+  const placeholder = CATEGORY_PLACEHOLDER[validCategory];
   const [targets, setTargets] = useState<Record<number, string>>({});
   const [selectedPkg, setSelectedPkg] = useState<SelectedPkg | null>(null);
 
-  const isFollowers = activeCategory === 'followers_mundial' || activeCategory === 'followers_br';
+  const isFollowers = validCategory === 'followers_mundial' || validCategory === 'followers_br';
   const prefix = isFollowers ? '@' : '🔗';
 
 
@@ -75,12 +78,12 @@ export default function PricingSection({ activePlatform, activeCategory, onCateg
           </p>
 
           <div className="inline-flex flex-wrap justify-center bg-secondary p-1 rounded-xl border border-border gap-1 mt-6">
-            {TABS.map(({ key, label }) => (
+            {tabs.map(({ key, label }) => (
               <button
                 key={key}
                 onClick={() => onCategoryChange(key)}
                 className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                  activeCategory === key
+                  validCategory === key
                     ? 'bg-background shadow-sm text-foreground'
                     : 'text-muted-foreground hover:text-foreground'
                 }`}
@@ -99,7 +102,7 @@ export default function PricingSection({ activePlatform, activeCategory, onCateg
               <span>{label}</span>
             </div>
           ))}
-          {activeCategory === 'views_reels' && (
+          {validCategory === 'views_reels' && (
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
               <Eye size={14} className="text-accent flex-shrink-0" />
               <span>Compatível com Reels e Stories</span>
@@ -150,7 +153,7 @@ export default function PricingSection({ activePlatform, activeCategory, onCateg
       {selectedPkg && (
         <CheckoutModal
           platform={activePlatform}
-          category={activeCategory}
+          category={validCategory}
           pkg={selectedPkg}
           onClose={() => setSelectedPkg(null)}
         />
