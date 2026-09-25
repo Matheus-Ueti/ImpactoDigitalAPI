@@ -1,4 +1,4 @@
-import { Gift, RefreshCw, Search, TrendingUp } from 'lucide-react';
+import { RefreshCw, TrendingUp } from 'lucide-react';
 
 export default function Header() {
   return (
@@ -26,24 +26,7 @@ export default function Header() {
           </a>
         </nav>
 
-        <div className="flex items-center gap-3">
-          <div className="hidden md:flex items-center bg-secondary border border-border rounded-lg overflow-hidden h-9">
-            <input
-              type="text"
-              placeholder="ID ou Link do pedido..."
-              className="bg-transparent border-none outline-none px-3 text-sm w-48 text-foreground placeholder:text-muted-foreground focus:ring-0"
-            />
-            <button className="px-3 hover:bg-muted transition-colors h-full">
-              <Search size={14} className="text-muted-foreground" />
-            </button>
-          </div>
-          <a
-            href="#teste-gratis"
-            className="hidden sm:flex bg-primary/10 text-primary border border-primary/20 hover:bg-primary/20 px-4 h-9 items-center justify-center rounded-lg text-sm font-medium transition-colors gap-2"
-          >
-            <Gift size={14} /> Teste Grátis
-          </a>
-        </div>
+        <div className="flex items-center gap-3" />
       </div>
     </header>
   );
