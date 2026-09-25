@@ -10,7 +10,7 @@ import type { Category } from '@/data/constants';
 
 export default function App() {
   const [activePlatform, setActivePlatform] = useState('instagram');
-  const [activeCategory, setActiveCategory] = useState<Category>('followers');
+  const [activeCategory, setActiveCategory] = useState<Category>('followers_mundial');
 
   return (
     <div className="min-h-screen bg-background text-foreground selection:bg-primary/30 font-sans overflow-x-hidden">
