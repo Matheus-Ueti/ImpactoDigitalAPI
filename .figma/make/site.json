@@ -1,0 +1,10 @@
+{
+  "description": "Provides a simple, user-friendly platform for quick communication and interaction, enhancing connectivity and engagement for all users.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
